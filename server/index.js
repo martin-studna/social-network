@@ -59,26 +59,3 @@ app.post('/mews', (req, res) => {
 app.listen(5000, () => {
   console.log("Listening on localhost:5000");
 });
-
-
-function listAllMews() {
-  fetch(API_URL)
-    .then(response => response.json())
-    .then(mews => {
-      console.log(mews)
-      mews.forEach(mew => {
-        const div = document.createElement('div');
-
-        const header = document.createElement('h3');
-        header.textContent = mew.name;
-
-        const contents = document.createElement('p');
-        contents.textContent = mew.content;
-
-        div.appendChild(header);
-        div.appendChild(contents);
-
-        mewsElement.appendChild
-      })
-    })
-}
