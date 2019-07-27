@@ -17,7 +17,7 @@ form.addEventListener("submit", event => {
     name,
     content
   };
-  console.log(mew);
+  
   form.style.display = "none";
   loadingElement.style.display = "";
 
@@ -29,11 +29,10 @@ form.addEventListener("submit", event => {
     }
   })
     .then(response => response.json())
-    .then(createMew => {
-      console.log(createMew);
+    .then(createdMew => {
       form.reset();
-      form.style.display = "";
-      loadingElement.style.display = "none";
+      form.style.display = '';
+      listAllMews();
     });
 });
 
@@ -41,7 +40,7 @@ function listAllMews() {
   fetch(API_URL)
     .then(response => response.json())
     .then(mews => {
-      console.log(mews);
+      mews.reverse();
       mews.forEach(mew => {
         const div = document.createElement("div");
 
@@ -51,10 +50,15 @@ function listAllMews() {
         const contents = document.createElement("p");
         contents.textContent = mew.content;
 
+        const date = document.createElement('small');
+        date.textContent = new Date(mew.created);
+
         div.appendChild(header);
         div.appendChild(contents);
+        div.appendChild(date)
 
         mewsElement.appendChild(div);
+        loadingElement.style.display = "none";
       });
     });
 }
